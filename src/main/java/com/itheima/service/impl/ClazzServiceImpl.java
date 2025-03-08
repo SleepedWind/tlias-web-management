@@ -3,6 +3,7 @@ package com.itheima.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.itheima.mapper.ClazzMapper;
 import com.itheima.pojo.Clazz;
+import com.itheima.pojo.ClazzAddParam;
 import com.itheima.pojo.ClazzQueryDto;
 import com.itheima.pojo.QueryResult;
 import com.itheima.service.ClazzService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -46,5 +48,19 @@ public class ClazzServiceImpl implements ClazzService {
         //3.将查询结果封装返回
         QueryResult clazzQueryResult = new QueryResult(total,rows);
         return clazzQueryResult;
+    }
+
+    @Override
+    public List<Clazz> list() {
+        //返回全部班级信息
+        return clazzMapper.findAll();
+    }
+
+    @Override
+    public void add(ClazzAddParam clazzAddParam) {
+        LocalDateTime now = LocalDateTime.now();
+        clazzAddParam.setCreateTime(now);
+        clazzAddParam.setUpdateTime(now);
+        clazzMapper.add(clazzAddParam);
     }
 }
