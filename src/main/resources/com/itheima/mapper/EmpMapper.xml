@@ -83,6 +83,19 @@
         from emp e left join emp_expr ee on e.id = ee.emp_id
         where e.id = #{id}
     </select>
+    <select id="totalEmp" resultType="java.lang.Integer">
+        select count(*) deptName from emp e left join dept d on e.dept_id = d.id
+        <where>
+            <if test="name != null and name != ''">
+                e.name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if><if test="begin != null and end != null">
+            and entry_date between #{begin} and #{end}
+        </if>
+        </where>
+    </select>
 
     <insert id="addEmp" >
         insert into emp

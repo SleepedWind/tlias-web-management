@@ -18,8 +18,7 @@ public interface EmpMapper {
     @Select("select * from emp")
     List<Emp> empList();
 
-    @Select("select count(*) from emp")
-    Integer totalEmp();
+    Integer totalEmp(String name, Integer gender, LocalDate begin, LocalDate end);
 
     void addEmp(Emp emp);
 

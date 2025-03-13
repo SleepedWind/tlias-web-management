@@ -104,7 +104,7 @@ public class EmpServiceImpl implements EmpService {
         List<Emp> empList = empMapper.findAllEmp(name,gender,begin,end);
 
 
-        return new PageResult(empMapper.totalEmp(),empList);
+        return new PageResult(empMapper.totalEmp(name,gender,begin,end),empList);
     }
 
 
