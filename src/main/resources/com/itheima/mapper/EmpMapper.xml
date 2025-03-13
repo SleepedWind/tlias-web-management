@@ -106,6 +106,8 @@
             <if test="entryDate != null">entry_date,</if>
             <if test="job != null">job,</if>
             <if test="salary != null">salary,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="createTime != null">create_time,</if>
         </trim>
         <trim prefix=" values(" suffix=")" suffixOverrides=",">
             #{username},#{name},#{gender},#{phone},
@@ -114,6 +116,8 @@
             <if test="entryDate != null">#{entryDate},</if>
             <if test="job != null">#{job},</if>
             <if test="salary != null">#{salary},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime}</if>
         </trim>
     </insert>
     

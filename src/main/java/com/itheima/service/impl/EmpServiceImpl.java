@@ -37,6 +37,7 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public void addEmp(Emp emp) {
         emp.setUpdateTime(LocalDateTime.now());
+        emp.setCreateTime(LocalDateTime.now());
         empMapper.addEmp(emp);
         List<EmpExpr> empExprList = emp.getExprList();
         if(!CollectionUtils.isEmpty(empExprList)){
