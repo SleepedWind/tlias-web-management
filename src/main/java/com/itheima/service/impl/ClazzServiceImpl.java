@@ -23,7 +23,7 @@ public class ClazzServiceImpl implements ClazzService {
     @Override
     public QueryResult<Clazz> find(ClazzQueryDto clazzQueryDto) {
         //1.查询班级总记录数
-        Long total = clazzMapper.count();
+        Long total = clazzMapper.count(clazzQueryDto.getName(),clazzQueryDto.getBegin(),clazzQueryDto.getEnd());
 
         //2.根据条件查询班级记录列表
         //2.1设置当前时间

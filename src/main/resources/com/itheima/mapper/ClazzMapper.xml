@@ -19,4 +19,13 @@
             <if test="begin != null and end != null">and begin_date between #{begin} and #{end}</if>
         </where>
     </select>
+    <select id="count" resultType="java.lang.Long">
+        select count(*) from clazz c left join emp e on c.master_id = e.id
+        <where>
+            <if test="name != null and name != ''">c.name like concat('%',#{name},'%')</if>
+            <if test="begin != null and end != null">and begin_date between #{begin} and #{end}</if>
+        </where>
+
+    </select>
+
 </mapper>
