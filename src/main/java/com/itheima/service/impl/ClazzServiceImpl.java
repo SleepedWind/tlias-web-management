@@ -81,4 +81,18 @@ public class ClazzServiceImpl implements ClazzService {
     public Clazz queryById(Integer id) {
         return clazzMapper.queryById(id);
     }
+
+    @Override
+    public void updateClazz(Clazz clazzInfo) {
+        //设置更新时间
+        clazzInfo.setUpdateTime(LocalDateTime.now());
+        //调用mapper根据id更新班级信息
+         clazzMapper.updateClazzById(clazzInfo);
+    }
+
+    @Override
+    public void deleteClazz(Integer id) {
+        //调用mapper根据id删除班级信息
+        clazzMapper.deleteClazzById(id);
+    }
 }

@@ -58,4 +58,27 @@ public class ClazzController {
         Clazz clazz = clazzService.queryById(id);
         return Result.success(clazz);
     }
+
+    /**
+     * 修改班级信息
+     * @param clazzInfo 班级信息
+     * @return result.success
+     */
+    @PutMapping
+    public Result updateClazzInfo(@RequestBody Clazz clazzInfo){
+        log.info("修改班级信息:{}",clazzInfo);
+        clazzService.updateClazz(clazzInfo);
+        return Result.success();
+    }
+
+    /**
+     *  删除班级信息
+     */
+    @DeleteMapping("/{id}")
+    public Result deleteClazz(@PathVariable Integer id){
+        log.info("删除班级信息:{}",id);
+        clazzService.deleteClazz(id);
+        return Result.success();
+    }
 }
+

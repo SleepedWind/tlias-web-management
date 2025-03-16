@@ -2,9 +2,7 @@ package com.itheima.mapper;
 
 import com.itheima.pojo.Clazz;
 import com.itheima.pojo.ClazzAddParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,4 +25,10 @@ public interface ClazzMapper {
 
     @Select("select id, name, room, begin_date, end_date, master_id, subject, create_time, update_time from clazz where id=#{id}")
     Clazz queryById(Integer id);
+
+    @Update("update clazz set name=#{name},room=#{room},begin_date=#{beginDate},end_date=#{endDate},master_id=#{masterId},subject=#{subject},update_time=#{updateTime} where id=#{id}")
+    void updateClazzById(Clazz clazzInfo);
+
+    @Delete("delete from clazz where id = #{id}")
+    void deleteClazzById(Integer id);
 }
