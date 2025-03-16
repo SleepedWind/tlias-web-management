@@ -19,8 +19,12 @@ public interface ClazzMapper {
     List<Clazz> selectByNameOrTime(String name, LocalDate begin, LocalDate end);
 
     //根据条件查询班级列表
-    @Select("select c.id, c.name, c.room, c.begin_date, c.end_date, c.master_id, c.subject, c.create_time, c.update_time,e.name masterName from clazz c left join emp e on c.master_id = e.id")
+    @Select("select c.id, c.name, c.room, c.begin_date, c.end_date, c.master_id, c.subject, c.create_time, c.update_time,e.name masterName " +
+            "from clazz c left join emp e on c.master_id = e.id")
     List<Clazz> findAll();
 
     void add(ClazzAddParam clazzAddParam);
+
+    @Select("select id, name, room, begin_date, end_date, master_id, subject, create_time, update_time from clazz where id=#{id}")
+    Clazz queryById(Integer id);
 }

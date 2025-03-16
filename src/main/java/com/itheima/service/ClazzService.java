@@ -14,4 +14,6 @@ public interface ClazzService {
     List<Clazz> list();
 
     void add(ClazzAddParam clazzAddParam);
+
+    Clazz queryById(Integer id);
 }

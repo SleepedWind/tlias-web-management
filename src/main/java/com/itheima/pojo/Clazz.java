@@ -18,7 +18,7 @@ public class Clazz {
     private LocalDate endDate;
     private Integer masterId;
     private String masterName;
-    private String subject;
+    private Integer subject;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

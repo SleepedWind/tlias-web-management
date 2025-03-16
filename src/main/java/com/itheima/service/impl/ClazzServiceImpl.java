@@ -20,6 +20,9 @@ public class ClazzServiceImpl implements ClazzService {
     @Autowired
     private ClazzMapper clazzMapper;
 
+    /**
+     *分页查询班级列表数据
+     */
     @Override
     public QueryResult<Clazz> find(ClazzQueryDto clazzQueryDto) {
         //1.查询班级总记录数
@@ -50,17 +53,32 @@ public class ClazzServiceImpl implements ClazzService {
         return clazzQueryResult;
     }
 
+    /**
+     * 查询全部班级信息
+     * @return
+     */
     @Override
     public List<Clazz> list() {
         //返回全部班级信息
         return clazzMapper.findAll();
     }
 
+    /**
+     * 新增班级
+     */
     @Override
     public void add(ClazzAddParam clazzAddParam) {
         LocalDateTime now = LocalDateTime.now();
         clazzAddParam.setCreateTime(now);
         clazzAddParam.setUpdateTime(now);
         clazzMapper.add(clazzAddParam);
+    }
+
+    /**
+     * 根据id查询班级信息
+     */
+    @Override
+    public Clazz queryById(Integer id) {
+        return clazzMapper.queryById(id);
     }
 }
