@@ -7,6 +7,8 @@ import com.itheima.pojo.EmpExpr;
 import com.itheima.pojo.LoginInfo;
 import com.itheima.pojo.PageResult;
 import com.itheima.service.EmpService;
+import com.itheima.utils.JwtOperator;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -27,12 +31,18 @@ public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
 
+    /**
+     * 员工列表信息查询
+     */
     @Override
     public List<Emp> empList() {
 
         return empMapper.empList();
     }
 
+    /**
+     * 新增员工
+     */
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void addEmp(Emp emp) {
@@ -48,7 +58,6 @@ public class EmpServiceImpl implements EmpService {
 
     /**
      * 删除员工
-     * @param ids
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -59,6 +68,9 @@ public class EmpServiceImpl implements EmpService {
         empMapper.deleteEmpExpr(ids);
     }
 
+    /**
+     * 根据id查询员工信息
+     */
     @Override
     public Emp selectEmpById(Integer id) {
 
@@ -67,6 +79,9 @@ public class EmpServiceImpl implements EmpService {
         return emp;
     }
 
+    /**
+     * 修改员工信息
+     */
     @Override
     public void updateEmp(Emp emp) {
         //1.根据参数更新 员工基本信息表emp 数据
@@ -85,6 +100,9 @@ public class EmpServiceImpl implements EmpService {
 
     }
 
+    /**
+     * 登录验证
+     */
     @Override
     public LoginInfo login(Emp emp) {
         //1.调用mapper接口，根据用户名和密码查询员工信息
@@ -92,7 +110,11 @@ public class EmpServiceImpl implements EmpService {
         //2.判断：是否存在员工，如果存在，组装成功登录信息
         if (e != null){
             log.info("登录成功，员工信息：{}",e);
-            return  new LoginInfo(e.getId(),e.getUsername(),e.getName(),"");
+            Map<String,Object> claims = new HashMap<String,Object>();
+            claims.put("id",e.getId());
+            claims.put("username",e.getUsername());
+            String token = JwtOperator.getToken(claims);
+            return  new LoginInfo(e.getId(),e.getUsername(),e.getName(),token);
         }
         //3.不存在，返回null
         return null;
