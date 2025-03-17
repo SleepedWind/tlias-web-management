@@ -8,14 +8,11 @@ import com.itheima.pojo.LoginInfo;
 import com.itheima.pojo.PageResult;
 import com.itheima.service.EmpService;
 import com.itheima.utils.JwtOperator;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,8 +72,7 @@ public class EmpServiceImpl implements EmpService {
     public Emp selectEmpById(Integer id) {
 
         //根据员工id查询返回 员工基本信息表emp 数据 及 员工工作经历表emp_expr 数据
-        Emp emp = empMapper.selectEmpById(id);
-        return emp;
+        return empMapper.selectEmpById(id);
     }
 
     /**
@@ -87,7 +83,7 @@ public class EmpServiceImpl implements EmpService {
         //1.根据参数更新 员工基本信息表emp 数据
         empMapper.updateEmp(emp);
         //2.根据参数中的empId删除 员工工作信息表emp_expr 内相关数据
-        List list = new ArrayList();
+        List<Integer> list = new ArrayList<Integer>();
         list.add(emp.getId());
         empMapper.deleteEmpExpr(list);
         //3.根据参数内的员工工作经历列表，添加员工工作信息

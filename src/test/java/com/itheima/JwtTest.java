@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Character.getType;
 
 @Slf4j
 public class JwtTest {
@@ -29,8 +28,8 @@ public class JwtTest {
                 .compact(); //构建令牌
         System.out.println(jwt);
 
-        Claims parseToken = new JwtOperator().parseToken(jwt);
+        Claims parseToken = JwtOperator.parseToken(jwt);
         System.out.println(parseToken);
-        System.out.println(parseToken.getClass().toString());
+        System.out.println(parseToken.getClass());
     }
 }
